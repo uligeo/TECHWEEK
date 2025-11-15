@@ -320,6 +320,26 @@ def get_styles(dark_mode=False):
         input, label, select, textarea {
             color: #ffffff !important;
         }
+        /* Forzar estilos en todos los elementos del selectbox */
+        .stSelectbox * {
+            color: #ffffff !important;
+        }
+        /* Texto en el dropdown cuando está abierto */
+        [data-baseweb="popover"] * {
+            color: #ffffff !important;
+        }
+        /* Opciones del menu */
+        [role="option"] {
+            color: #ffffff !important;
+            background-color: #2a2a2a !important;
+        }
+        [role="option"]:hover {
+            background-color: #bb86fc !important;
+        }
+        /* Input interno del selectbox */
+        [aria-labelledby] input {
+            color: #ffffff !important;
+        }
         </style>
         """
     else:
@@ -538,35 +558,40 @@ if len(df) > 1:
         
         st.sidebar.markdown("### Cambio vs Mes Anterior")
 
-        # Diseño mejorado para cambios mensuales
+        # Diseño mejorado para cambios mensuales - adaptativo para modo oscuro
         delta_color_no2 = "#00b894" if delta_no2 >= 0 else "#e17055"
         delta_color_t21 = "#00b894" if delta_t21 >= 0 else "#e17055"
 
-        st.sidebar.markdown("""
+        # Colores adaptativos para modo oscuro
+        bg_color = "#3a3a3a" if st.session_state.dark_mode else "white"
+        text_color = "#ffffff" if st.session_state.dark_mode else "#2d3436"
+        shadow = "0 2px 8px rgba(187,134,252,0.2)" if st.session_state.dark_mode else "0 2px 8px rgba(0,0,0,0.1)"
+
+        st.sidebar.markdown(f"""
         <div style="
-            background: white;
+            background: {bg_color};
             padding: 1rem;
             border-radius: 12px;
             margin: 0.5rem 0;
-            border-left: 4px solid {};
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid {delta_color_no2};
+            box-shadow: {shadow};
         ">
-            <h5 style="margin: 0 0 0.3rem 0; color: #2d3436;">Δ NO₂</h5>
-            <p style="margin: 0; font-size: 1.1rem; font-weight: 600; color: {};">{:+.1f}%</p>
+            <h5 style="margin: 0 0 0.3rem 0; color: {text_color};">Δ NO₂</h5>
+            <p style="margin: 0; font-size: 1.1rem; font-weight: 600; color: {delta_color_no2};">{delta_no2:+.1f}%</p>
         </div>
 
         <div style="
-            background: white;
+            background: {bg_color};
             padding: 1rem;
             border-radius: 12px;
             margin: 0.5rem 0;
-            border-left: 4px solid {};
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid {delta_color_t21};
+            box-shadow: {shadow};
         ">
-            <h5 style="margin: 0 0 0.3rem 0; color: #2d3436;">Δ T21</h5>
-            <p style="margin: 0; font-size: 1.1rem; font-weight: 600; color: {};">{:+.1f} K</p>
+            <h5 style="margin: 0 0 0.3rem 0; color: {text_color};">Δ T21</h5>
+            <p style="margin: 0; font-size: 1.1rem; font-weight: 600; color: {delta_color_t21};">{delta_t21:+.1f} K</p>
         </div>
-        """.format(delta_color_no2, delta_color_no2, delta_no2, delta_color_t21, delta_color_t21, delta_t21), unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
 st.sidebar.markdown("---")
 st.sidebar.info("**Tip**: Usa las pestañas superiores para explorar diferentes visualizaciones")
