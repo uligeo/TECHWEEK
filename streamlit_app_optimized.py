@@ -1048,16 +1048,23 @@ with tab4:
 # FOOTER
 # ============================================
 st.markdown("---")
-st.markdown("""
+# Footer dinámico según el modo
+footer_bg = "linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%)" if st.session_state.dark_mode else "linear-gradient(135deg, #f8f9ff 0%, #f1f3ff 100%)"
+footer_text_color = "#bb86fc" if st.session_state.dark_mode else "#6c5ce7"
+footer_subtitle_color = "#b3b3b3" if st.session_state.dark_mode else "#636e72"
+footer_border = "rgba(187, 134, 252, 0.2)" if st.session_state.dark_mode else "rgba(108, 92, 231, 0.1)"
+
+st.markdown(f"""
 <div style="
     text-align: center;
-    background: linear-gradient(135deg, #f8f9ff 0%, #f1f3ff 100%);
+    background: {footer_bg};
     padding: 2rem;
     border-radius: 16px;
     margin-top: 3rem;
-    border: 1px solid rgba(108, 92, 231, 0.1);
+    border: 1px solid {footer_border};
 ">
-    <p style="margin: 0; color: #6c5ce7; font-weight: 600;">Desarrollado con Streamlit | Datos: Google Earth Engine</p>
-    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #636e72;">Península de Yucatán - Análisis Satelital 2024</p>
+    <p style="margin: 0; color: {footer_text_color}; font-weight: 600;">Desarrollado con Streamlit | Datos: Google Earth Engine | Ecodata</p>
+    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: {footer_subtitle_color};">Península de Yucatán - Análisis Satelital 2024</p>
+    <p style="margin: 0.5rem 0 0 0; font-size: 0.8rem; color: {footer_subtitle_color};">Edgar Yepez | ypz.edgar@gmail.com</p>
 </div>
 """, unsafe_allow_html=True)
