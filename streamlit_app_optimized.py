@@ -73,6 +73,45 @@ def get_styles(dark_mode=False):
         .stSelectbox label, .stSelectbox div, .stSelectbox span {
             color: #ffffff !important;
         }
+        /* Selectbox específico - dropdown y opciones */
+        .stSelectbox > div > div {
+            background-color: #2a2a2a !important;
+            color: #ffffff !important;
+        }
+        .stSelectbox [data-baseweb="select"] {
+            background-color: #2a2a2a !important;
+            color: #ffffff !important;
+        }
+        .stSelectbox [data-baseweb="select"] > div {
+            background-color: #2a2a2a !important;
+            color: #ffffff !important;
+        }
+        /* Menu dropdown del selectbox */
+        [data-baseweb="popover"] {
+            background-color: #2a2a2a !important;
+        }
+        [data-baseweb="menu"] {
+            background-color: #2a2a2a !important;
+        }
+        [data-baseweb="menu"] li {
+            background-color: #2a2a2a !important;
+            color: #ffffff !important;
+        }
+        [data-baseweb="menu"] li:hover {
+            background-color: #bb86fc !important;
+            color: #ffffff !important;
+        }
+        /* Valor seleccionado en el selectbox */
+        [data-baseweb="select"] [role="combobox"] {
+            color: #ffffff !important;
+        }
+        [data-baseweb="select"] span {
+            color: #ffffff !important;
+        }
+        /* Flecha del dropdown */
+        [data-baseweb="select"] svg {
+            fill: #ffffff !important;
+        }
         .stSlider label, .stSlider span {
             color: #ffffff !important;
         }
@@ -162,6 +201,22 @@ def get_styles(dark_mode=False):
         }
         .stSidebar [data-testid="stSidebarNav"] {
             background-color: #2a2a2a !important;
+        }
+        /* Selectbox en el sidebar */
+        .stSidebar .stSelectbox > div > div {
+            background-color: #3a3a3a !important;
+            border: 1px solid #bb86fc !important;
+        }
+        .stSidebar [data-baseweb="select"] {
+            background-color: #3a3a3a !important;
+            border: 1px solid #bb86fc !important;
+        }
+        .stSidebar [data-baseweb="select"] > div {
+            background-color: #3a3a3a !important;
+            color: #ffffff !important;
+        }
+        .stSidebar [data-baseweb="select"] span {
+            color: #ffffff !important;
         }
         .metric-card {
             background: #2a2a2a;
