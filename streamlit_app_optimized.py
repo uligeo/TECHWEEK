@@ -62,27 +62,72 @@ def get_styles(dark_mode=False):
         .stMarkdown, .stMarkdown p, .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4, .stMarkdown h5, .stMarkdown h6 {
             color: #ffffff !important;
         }
-        .stSelectbox label, .stSelectbox div {
+        /* Títulos y subtítulos específicos */
+        h1, h2, h3, h4, h5, h6 {
             color: #ffffff !important;
         }
+        .main h1, .main h2, .main h3, .main h4, .main h5, .main h6 {
+            color: #ffffff !important;
+        }
+        /* Controles y labels */
+        .stSelectbox label, .stSelectbox div, .stSelectbox span {
+            color: #ffffff !important;
+        }
+        .stSlider label, .stSlider span {
+            color: #ffffff !important;
+        }
+        .stRadio label, .stRadio span {
+            color: #ffffff !important;
+        }
+        .stRadio div label {
+            color: #ffffff !important;
+        }
+        [role="radiogroup"] label {
+            color: #ffffff !important;
+        }
+        .stCheckbox label, .stCheckbox span {
+            color: #ffffff !important;
+        }
+        /* Tabs */
         .stTabs [data-baseweb="tab-list"] button {
             color: #ffffff !important;
         }
-        .element-container, .stAlert, .stInfo {
+        .stTabs [data-baseweb="tab"] span {
+            color: #ffffff !important;
+        }
+        .stTabs button span {
+            color: #ffffff !important;
+        }
+        /* Alertas e info */
+        .element-container, .stAlert, .stInfo, .stSuccess, .stWarning, .stError {
+            color: #ffffff !important;
+        }
+        .stAlert > div, .stInfo > div, .stSuccess > div, .stWarning > div, .stError > div {
+            color: #ffffff !important;
+        }
+        /* Textos en general */
+        p, span, div {
+            color: #ffffff !important;
+        }
+        /* Métricas y números */
+        .metric-value, .metric-label {
+            color: #ffffff !important;
+        }
+        [data-testid="metric-container"] {
             color: #ffffff !important;
         }
         .main-title {
             font-size: 3.2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #bb86fc 0%, #6200ea 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background: linear-gradient(135deg, #bb86fc 0%, #6200ea 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
             margin-bottom: 0.8rem;
             letter-spacing: -0.02em;
         }
         .subtitle {
             font-size: 1.4rem;
-            color: #b3b3b3;
+            color: #b3b3b3 !important;
             margin-bottom: 2.5rem;
             font-weight: 400;
         }
@@ -107,6 +152,12 @@ def get_styles(dark_mode=False):
             background: linear-gradient(180deg, #2a2a2a 0%, #1e1e1e 100%) !important;
         }
         .stSidebar .stMarkdown, .stSidebar .stSelectbox label, .stSidebar h1, .stSidebar h2, .stSidebar h3 {
+            color: #ffffff !important;
+        }
+        .stSidebar p, .stSidebar span, .stSidebar div {
+            color: #ffffff !important;
+        }
+        .stSidebar .stMarkdown h1, .stSidebar .stMarkdown h2, .stSidebar .stMarkdown h3, .stSidebar .stMarkdown h4 {
             color: #ffffff !important;
         }
         .stSidebar [data-testid="stSidebarNav"] {
@@ -152,13 +203,67 @@ def get_styles(dark_mode=False):
             background: #3a3a3a !important;
             color: #ffffff !important;
         }
+        .stTabs [data-baseweb="tab"] span {
+            color: #ffffff !important;
+        }
         .stTabs [data-baseweb="tab"]:hover {
             background: linear-gradient(135deg, #bb86fc 0%, #6200ea 100%) !important;
+            color: white !important;
+        }
+        .stTabs [data-baseweb="tab"]:hover span {
             color: white !important;
         }
         .stTabs [data-baseweb="tab"][aria-selected="true"] {
             background: linear-gradient(135deg, #bb86fc 0%, #6200ea 100%) !important;
             color: white !important;
+        }
+        .stTabs [data-baseweb="tab"][aria-selected="true"] span {
+            color: white !important;
+        }
+        /* Subheaders y headers específicos de Streamlit */
+        [data-testid="stHeader"], .stHeader {
+            color: #ffffff !important;
+        }
+        .stSubheader, [data-testid="stSubheader"] {
+            color: #ffffff !important;
+        }
+        /* Expanders */
+        .streamlit-expanderHeader {
+            color: #ffffff !important;
+        }
+        [data-testid="stExpander"] summary {
+            color: #ffffff !important;
+        }
+        /* Botones */
+        .stButton button {
+            background-color: #bb86fc !important;
+            color: #ffffff !important;
+            border: none !important;
+        }
+        .stButton button:hover {
+            background-color: #6200ea !important;
+        }
+        /* Selectores más amplios para capturar todos los textos */
+        * {
+            color: #ffffff !important;
+        }
+        /* Excepciones para elementos que deben mantener su color */
+        .main-title * {
+            color: transparent !important;
+        }
+        .metric-container * {
+            color: white !important;
+        }
+        /* Radio buttons específicos */
+        [data-baseweb="radio"] label {
+            color: #ffffff !important;
+        }
+        [data-baseweb="radio"] span {
+            color: #ffffff !important;
+        }
+        /* Todos los inputs y labels */
+        input, label, select, textarea {
+            color: #ffffff !important;
         }
         </style>
         """
