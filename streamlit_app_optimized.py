@@ -29,87 +29,184 @@ st.set_page_config(
 DATA_DIR = "."
 
 # ============================================
+# CONFIGURACIÓN DE MODO OSCURO/CLARO
+# ============================================
+# Inicializar estado del tema si no existe
+if 'dark_mode' not in st.session_state:
+    st.session_state.dark_mode = False
+
+# Función para alternar modo oscuro
+def toggle_dark_mode():
+    st.session_state.dark_mode = not st.session_state.dark_mode
+
+# ============================================
 # ESTILOS CSS PERSONALIZADOS
 # ============================================
-st.markdown("""
-    <style>
-    .main-title {
-        font-size: 3.2rem;
-        font-weight: 800;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 0.8rem;
-        letter-spacing: -0.02em;
-    }
-    .subtitle {
-        font-size: 1.4rem;
-        color: #5a6c7d;
-        margin-bottom: 2.5rem;
-        font-weight: 400;
-    }
-    .metric-container {
-        background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
-        padding: 2rem;
-        border-radius: 20px;
-        color: white;
-        text-align: center;
-        box-shadow: 0 8px 32px rgba(108, 92, 231, 0.2);
-        backdrop-filter: blur(8px);
-    }
-    .info-box {
-        background: linear-gradient(135deg, #f8f9ff 0%, #f1f3ff 100%);
-        padding: 2rem;
-        border-radius: 16px;
-        border-left: 4px solid #6c5ce7;
-        box-shadow: 0 4px 16px rgba(108, 92, 231, 0.1);
-    }
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 12px;
-        background: linear-gradient(135deg, #f8f9ff 0%, #f1f3ff 100%);
-        border-radius: 16px;
-        padding: 8px;
-        margin-bottom: 1rem;
-    }
-    .stTabs [data-baseweb="tab"] {
-        padding: 14px 24px;
-        background: white;
-        border-radius: 12px;
-        border: 2px solid transparent;
-        transition: all 0.3s ease;
-    }
-    .stTabs [data-baseweb="tab"]:hover {
-        background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
-    }
-    .stTabs [data-baseweb="tab"][aria-selected="true"] {
-        background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
-        color: white;
-        box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
-    }
+def get_styles(dark_mode=False):
+    if dark_mode:
+        return """
+        <style>
+        .stApp {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        .main-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #bb86fc 0%, #6200ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.02em;
+        }
+        .subtitle {
+            font-size: 1.4rem;
+            color: #b3b3b3;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+        .metric-container {
+            background: linear-gradient(135deg, #6200ea 0%, #bb86fc 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(98, 0, 234, 0.3);
+            backdrop-filter: blur(8px);
+        }
+        .info-box {
+            background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid #bb86fc;
+            box-shadow: 0 4px 16px rgba(98, 0, 234, 0.2);
+            color: #ffffff;
+        }
+        .stSidebar {
+            background: linear-gradient(180deg, #2a2a2a 0%, #1e1e1e 100%);
+        }
+        .metric-card {
+            background: #2a2a2a;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(187, 134, 252, 0.2);
+            color: #ffffff;
+        }
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(187, 134, 252, 0.3);
+        }
+        .dark-mode-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: #bb86fc;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(187, 134, 252, 0.3);
+        }
+        </style>
+        """
+    else:
+        return """
+        <style>
+        .main-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.02em;
+        }
+        .subtitle {
+            font-size: 1.4rem;
+            color: #5a6c7d;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+        .metric-container {
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(108, 92, 231, 0.2);
+            backdrop-filter: blur(8px);
+        }
+        .info-box {
+            background: linear-gradient(135deg, #f8f9ff 0%, #f1f3ff 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid #6c5ce7;
+            box-shadow: 0 4px 16px rgba(108, 92, 231, 0.1);
+        }
+        .stTabs [data-baseweb="tab-list"] {
+            gap: 12px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f1f3ff 100%);
+            border-radius: 16px;
+            padding: 8px;
+            margin-bottom: 1rem;
+        }
+        .stTabs [data-baseweb="tab"] {
+            padding: 14px 24px;
+            background: white;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .stTabs [data-baseweb="tab"]:hover {
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+        }
+        .stTabs [data-baseweb="tab"][aria-selected="true"] {
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+        }
+        .stSidebar {
+            background: linear-gradient(180deg, #f8f9ff 0%, #f1f3ff 100%);
+        }
+        .metric-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(108, 92, 231, 0.1);
+        }
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(108, 92, 231, 0.15);
+        }
+        .dark-mode-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: #667eea;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        </style>
+        """
 
-    /* Mejoras generales del layout */
-    .stSidebar {
-        background: linear-gradient(180deg, #f8f9ff 0%, #f1f3ff 100%);
-    }
-
-    .metric-card {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 16px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        transition: all 0.3s ease;
-        border: 1px solid rgba(108, 92, 231, 0.1);
-    }
-
-    .metric-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 30px rgba(108, 92, 231, 0.15);
-    }
-    </style>
-""", unsafe_allow_html=True)
+# Aplicar estilos según el modo seleccionado
+st.markdown(get_styles(st.session_state.dark_mode), unsafe_allow_html=True)
 
 # ============================================
 # FUNCIÓN PARA CARGAR DATOS
@@ -168,6 +265,19 @@ st.markdown('<p class="subtitle">Análisis interactivo de datos satelitales mens
 # SIDEBAR - CONTROLES
 # ============================================
 st.sidebar.header("Panel de Control")
+
+# Botón para alternar modo oscuro
+col1, col2 = st.sidebar.columns([3, 1])
+with col1:
+    st.markdown("### Tema")
+with col2:
+    if st.button("🌙" if not st.session_state.dark_mode else "☀️",
+                 key="dark_mode_toggle",
+                 help="Alternar modo oscuro/claro"):
+        toggle_dark_mode()
+        st.rerun()
+
+st.sidebar.markdown("---")
 
 # Selector de mes
 available_months = sorted(df['Fecha'].dt.strftime('%Y-%m').unique().tolist())
@@ -495,14 +605,19 @@ with tab2:
     fig.update_yaxes(title_text="Densidad (mol/m²)", row=1, col=1, showgrid=True)
     fig.update_yaxes(title_text="Temperatura (K)", row=2, col=1, showgrid=True)
     
+    # Configurar template según el modo
+    template = 'plotly_dark' if st.session_state.dark_mode else 'plotly_white'
+    bg_color = 'rgba(30, 30, 30, 0.8)' if st.session_state.dark_mode else 'rgba(248, 249, 255, 0.8)'
+    paper_color = '#1e1e1e' if st.session_state.dark_mode else 'white'
+
     fig.update_layout(
         height=800,
         hovermode='x unified',
         showlegend=True,
-        template='plotly_white',
+        template=template,
         font=dict(size=12),
-        plot_bgcolor='rgba(248, 249, 255, 0.8)',
-        paper_bgcolor='white'
+        plot_bgcolor=bg_color,
+        paper_bgcolor=paper_color
     )
     
     st.plotly_chart(fig, use_container_width=True)
@@ -607,18 +722,24 @@ with tab3:
             line=dict(color='#e84393', width=4, dash='dash')
         ))
         
+        # Configurar template según el modo para gráfico de correlación
+        template = 'plotly_dark' if st.session_state.dark_mode else 'plotly_white'
+        bg_color = 'rgba(30, 30, 30, 0.8)' if st.session_state.dark_mode else 'rgba(248, 249, 255, 0.8)'
+        paper_color = '#1e1e1e' if st.session_state.dark_mode else 'white'
+        title_color = '#ffffff' if st.session_state.dark_mode else '#2d3436'
+
         fig.update_layout(
             title=dict(
                 text='Relación entre NO₂ y Temperatura de Brillo',
-                font=dict(size=18, color='#2d3436')
+                font=dict(size=18, color=title_color)
             ),
             xaxis_title='NO₂ - Densidad de columna (mol/m²)',
             yaxis_title='T21 - Temperatura de Brillo (K)',
             height=550,
-            template='plotly_white',
+            template=template,
             hovermode='closest',
-            plot_bgcolor='rgba(248, 249, 255, 0.8)',
-            paper_bgcolor='white'
+            plot_bgcolor=bg_color,
+            paper_bgcolor=paper_color
         )
         
         st.plotly_chart(fig, use_container_width=True)
