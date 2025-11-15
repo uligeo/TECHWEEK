@@ -47,8 +47,29 @@ def get_styles(dark_mode=False):
         return """
         <style>
         .stApp {
-            background-color: #1e1e1e;
-            color: #ffffff;
+            background-color: #1e1e1e !important;
+            color: #ffffff !important;
+        }
+        .stApp > div {
+            background-color: #1e1e1e !important;
+            color: #ffffff !important;
+        }
+        .main .block-container {
+            background-color: #1e1e1e !important;
+            color: #ffffff !important;
+        }
+        /* Forzar texto blanco en modo oscuro */
+        .stMarkdown, .stMarkdown p, .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4, .stMarkdown h5, .stMarkdown h6 {
+            color: #ffffff !important;
+        }
+        .stSelectbox label, .stSelectbox div {
+            color: #ffffff !important;
+        }
+        .stTabs [data-baseweb="tab-list"] button {
+            color: #ffffff !important;
+        }
+        .element-container, .stAlert, .stInfo {
+            color: #ffffff !important;
         }
         .main-title {
             font-size: 3.2rem;
@@ -83,7 +104,13 @@ def get_styles(dark_mode=False):
             color: #ffffff;
         }
         .stSidebar {
-            background: linear-gradient(180deg, #2a2a2a 0%, #1e1e1e 100%);
+            background: linear-gradient(180deg, #2a2a2a 0%, #1e1e1e 100%) !important;
+        }
+        .stSidebar .stMarkdown, .stSidebar .stSelectbox label, .stSidebar h1, .stSidebar h2, .stSidebar h3 {
+            color: #ffffff !important;
+        }
+        .stSidebar [data-testid="stSidebarNav"] {
+            background-color: #2a2a2a !important;
         }
         .metric-card {
             background: #2a2a2a;
@@ -111,6 +138,27 @@ def get_styles(dark_mode=False):
             font-weight: 600;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(187, 134, 252, 0.3);
+        }
+        /* Forzar colores en tablas y dataframes */
+        .stDataFrame, .stDataFrame table, .stDataFrame th, .stDataFrame td {
+            background-color: #2a2a2a !important;
+            color: #ffffff !important;
+        }
+        /* Tabs en modo oscuro */
+        .stTabs [data-baseweb="tab-list"] {
+            background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%) !important;
+        }
+        .stTabs [data-baseweb="tab"] {
+            background: #3a3a3a !important;
+            color: #ffffff !important;
+        }
+        .stTabs [data-baseweb="tab"]:hover {
+            background: linear-gradient(135deg, #bb86fc 0%, #6200ea 100%) !important;
+            color: white !important;
+        }
+        .stTabs [data-baseweb="tab"][aria-selected="true"] {
+            background: linear-gradient(135deg, #bb86fc 0%, #6200ea 100%) !important;
+            color: white !important;
         }
         </style>
         """
